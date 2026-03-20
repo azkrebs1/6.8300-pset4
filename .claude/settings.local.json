@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(cd \"/c/Users/azkre/Documents/Y4 S2/6.8300/pset4_student/pset-4\" && python -c \"\nimport torch\nimport torch.nn.functional as F\n\n# Reproduce the test\ngrid = torch.arange\\(1 * 3 * 5 * 6, dtype=torch.float32\\).reshape\\(1, 3, 5, 6\\) / 100.0\n\ncoords = torch.tensor\\(\n    [[[0.2, -0.5, 0.25],\n      [0.4, -0.6, -0.5],\n      [-0.2, 0.8, 0.1],\n      [1.0, -1.0, -0.2]]],\n    dtype=torch.float32,\n\\)\nxy = coords[:,:,:2].unsqueeze\\(2\\)\nz = coords[:,:,2:]\n\nexpected_features = torch.tensor\\(\n    [[ 0.0760,  0.3760,  0.6760],\n     [ 0.0670,  0.3670,  0.6670],\n     [ 0.2590,  0.5590,  0.8590],\n     [ 0.0125,  0.0875,  0.1625]]\n\\)\n\nfor ac in [True, False]:\n    values = F.grid_sample\\(grid, xy, mode='bilinear', align_corners=ac\\)\n    values = values.squeeze\\(-1\\).transpose\\(1,2\\)\n    print\\(f'align_corners={ac}: {values[0]}'\\)\nprint\\('Expected:', expected_features\\)\n\" 2>&1)"
+    ]
+  }
+}
